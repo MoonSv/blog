@@ -10,19 +10,27 @@ a{
     display: block;
     clear: both;
 }
-.top-nav-bar{
-    margin: 20px 16px;
+
+.top-nav-bar-inner{
+    padding: 0 16px;
+
 }
-.top-nav-bar>nav>ul{
+
+.top-nav-bar{
+    margin: 20px 0px;
+    width: 100%;
+    position: fixed;
+}
+.top-nav-bar nav>ul{
     list-style: none;
     margin: 0;
     padding: 0;
 }
-.top-nav-bar>nav>ul>li{
+.top-nav-bar nav>ul>li{
     float: left;
     margin: 0 17px;
 }
-.top-nav-bar>nav>ul>li>a{
+.top-nav-bar nav>ul>li>a{
     color: #B7B7B7;
     font-size: 12px;
     font-weight: bold;
@@ -31,7 +39,7 @@ a{
     padding: 5px 0;
     display: block;
 }
-.top-nav-bar>nav>ul>li>a:hover{
+.top-nav-bar nav>ul>li>a:hover{
     border-bottom: 3px solid #e06567;
 }
 .top-nav-bar .logo{
@@ -44,4 +52,8 @@ a{
 }
 .top-nav-bar .logo .Sv{
     color: #9a9da2;
+}
+.banner{
+    background-image: url("./img/train.jpg");
+    height: 300px;
 }
