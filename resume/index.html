@@ -128,15 +128,29 @@
             </li>
         </ol>
     </section>
-    <section>
+    <section class="portfolio">
         <h2>Portfolio</h2>
         <nav>
-            <ol>
-                <li>ALL</li>
-                <li>FRAME</li>
-                <li>ORIGIN JS&amp;CSS</li>
+            <ol class="clearfix">
+                <li id="portfolio1">ALL</li>
+                <li id="portfolio2">FRAME</li>
+                <li id="portfolio3">ORIGIN JS&amp;CSS</li>
             </ol>
+            <div id="portfolioBar" class="bar bar-style1">
+                <div class="bar-inner"></div>
+            </div>
         </nav>
+        <script>
+            portfolio1.onclick = function(){
+                portfolioBar.className = "bar bar-style1";
+            }
+            portfolio2.onclick = function(){
+                portfolioBar.className = "bar bar-style2";
+            }
+            portfolio3.onclick = function(){
+                portfolioBar.className = "bar bar-style3";
+            }
+        </script>
         <div class="works">
             <div class="big"></div>
             <div class="small"></div>

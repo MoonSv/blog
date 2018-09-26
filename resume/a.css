@@ -1,6 +1,7 @@
 body{
     margin: 0;
     background-color: #efefef;
+    font-family: "sans-serif";
 }
 a{
     color: inherit;
@@ -181,7 +182,8 @@ section.skills {
     max-width: 940px;
     margin: 50px auto;
 }
-section.skills h2{
+section.skills h2,
+section.portfolio h2{
     text-align: center;
     font-size: 34px;
     line-height: 1.2;
@@ -215,4 +217,46 @@ section.skills .progress{
     border-radius: 2px;
     width: 50%;
     background-color: #e06567;
+}
+section.portfolio{
+    margin-bottom: 50px;
+    text-align: center;
+}
+section.portfolio nav{
+    text-align: center;
+    margin-top: 15px;
+    display: inline-block;
+}
+section.portfolio nav ol{
+    
+}
+section.portfolio nav li{
+    float: left;
+    margin-left: 45px;
+    cursor: pointer;
+}
+section.portfolio nav li:first-child{
+    margin-left: 0; 
+}
+section.portfolio nav .bar{
+    height: 5px;
+    background-color: #fff;
+    border-radius: 3px;
+    margin-top: 7px;
+}
+section.portfolio nav .bar-inner{
+    height: 100%;
+    background-color: #e06567;
+    transition: all, 0.15s;
+}
+section.portfolio nav .bar-style1 .bar-inner{
+    width: 30px;
+}
+section.portfolio nav .bar-style2 .bar-inner{
+    width: 60px;
+    margin-left: 24%;
+}
+section.portfolio nav .bar-style3 .bar-inner{
+    width: 122px;
+    margin-left: 59%;
 }
