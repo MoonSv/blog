@@ -20,6 +20,7 @@
             ['z','x','c','v','b','n','m']
         ];
         var hash = {
+            'a': 'apple.com',
             'q': 'qq.com',
             'w': 'wangjq.net',
             'm': 'xa.meituan.com',
@@ -29,7 +30,8 @@
             'c': 'cse.unsw.com',
             'b': 'baidu.com',
             'e': 'ebay.com',
-            't': 'taobao.com'
+            't': 'taobao.com',
+            'i': 'iqiyi.com'
         }
         var hashInLocalStorage = JSON.parse(localStorage.getItem('hash') || 'null');
         if (hashInLocalStorage) {
@@ -39,20 +41,30 @@
             var div = document.createElement('div');
             for (var j = 0; j < keyboardList[i].length; j++) {
                 var kbd = document.createElement('kbd');
-                kbd.textContent = keyboardList[i][j];
+                kbd.className = 'normal-kbd'
+                var letter = document.createElement('span');
+                letter.textContent = keyboardList[i][j]
                 var button = document.createElement('button');
-                button.textContent = "Edit";
+                button.textContent = "E";
                 button.id = keyboardList[i][j];
                 button.onclick = function(e){
+                    console.log(e.target.nextSibling);
                     var editContent = prompt();
+                    e.target.nextSibling.src = `http://${editContent}/favicon.ico`
                     hash[e.target.id] = editContent;
                     localStorage.setItem('hash', JSON.stringify(hash));
-                } 
+                }
+                var img = document.createElement('img');
+                img.className = 'icon'
+                img.src = `http://${hash[keyboardList[i][j]]}/favicon.ico`
+                kbd.appendChild(letter); 
                 kbd.appendChild(button)
+                kbd.appendChild(img); 
                 div.appendChild(kbd);
             }
             show.appendChild(div);
         }
+        
         document.onkeypress = function(e) {
             window.open(`http://${hash[e.key]}`);
         }
