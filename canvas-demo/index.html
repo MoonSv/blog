@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Canvas-demo</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #canvas{
+            background-color: rgb(223, 223, 223);
+        }
+        #eraser{
+            position: absolute;
+            left: 10px;
+            bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="canvas"></canvas>
+    <button id="eraser">Eraser</button>
+    <script>
+        // 初始化canvas画布
+        initCanvas();
+        // 得到可画内容
+        var content = canvas.getContext('2d');
+        // 设置默认画笔颜色和宽度
+        var brushColor = '#000';
+        var brushWidth = 5;
+
+        content.fillStyle = brushColor;
+
+        var onDrawing = false;
+        var prePosition = {};
+        canvas.onmousedown = function(e){
+            onDrawing = true;
+            var x = e.clientX;
+            var y = e.clientY;
+            prePosition = {'x': x, 'y': y};
+            drawCircle(x, y, brushWidth);
+        }
+        canvas.onmousemove = function(e){
+            if (onDrawing) {
+                var x = e.clientX;
+                var y = e.clientY;
+                drawCircle(x, y, brushWidth);
+                drawLine(prePosition.x, prePosition.y, x, y)
+                prePosition = {'x': x, 'y': y};
+            }
+        }
+        canvas.onmouseup = function(e){
+            onDrawing = false;;
+            var x = e.clientX;
+            var y = e.clientY;
+            drawCircle(x, y, brushWidth);
+        }
+
+        // 改变窗口大小实时调整画布
+        window.onresize = function(){
+            initCanvas();
+        }
+        function initCanvas(){
+            var height = document.documentElement.clientHeight;
+            var width = document.documentElement.clientWidth;
+            canvas.height = height;
+            canvas.width = width;
+        }
+        function drawCircle(x, y, brushWidth){
+            content.beginPath();
+            content.arc(x, y, brushWidth, 0, Math.PI * 2);
+            content.closePath();
+            content.fill();
+        }
+        function drawLine(x, y, nx, ny){
+            content.beginPath();
+            content.strokeStyle = "black";
+            content.lineWidth = brushWidth*2;
+            content.moveTo(x, y)
+            content.lineTo(nx, ny);
+            content.closePath();
+            content.stroke();
+        }
+    </script>
+</body>
+</html>
