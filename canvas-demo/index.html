@@ -129,7 +129,7 @@
                 var x = e.touches[0].clientX;
                 var y = e.touches[0].clientY;
                 if (isEraser) {
-                    content.clearRect(x - 5, y - 5, 10, 10);
+                    content.clearRect(x - 25, y - 25, 50, 50);
                 } else {
                     prePosition = { 'x': x, 'y': y };
                     drawCircle(x, y, brushWidth);
@@ -151,7 +151,7 @@
             }
             canvas.ontouchend = function (e) {
                 if (isEraser) {
-                    content.clearRect(x - 5, y - 5, 10, 10);
+                    content.clearRect(x - 25, y - 25, 50, 50);
                 } else {
                     var x = e.touches[0].clientX;
                     var y = e.touches[0].clientY;
@@ -165,7 +165,7 @@
                 var x = e.clientX;
                 var y = e.clientY;
                 if (isEraser) {
-                    content.clearRect(x - 5, y - 5, 10, 10);
+                    content.clearRect(x - 25, y - 25, 50, 50);
                 } else {
                     prePosition = { 'x': x, 'y': y };
                     drawCircle(x, y, brushWidth);
@@ -176,7 +176,7 @@
                     var x = e.clientX;
                     var y = e.clientY;
                     if (isEraser) {
-                        content.clearRect(x - 5, y - 5, 10, 10);
+                        content.clearRect(x - 25, y - 25, 50, 50);
                         // drawLine(prePosition.x, prePosition.y, x-5, y-5)
                     } else {
                         drawCircle(x, y, brushWidth);
@@ -187,7 +187,7 @@
             }
             canvas.onmouseup = function (e) {
                 if (isEraser) {
-                    content.clearRect(x - 5, y - 5, 10, 10);
+                    content.clearRect(x - 25, y - 25, 50, 50);
                 } else {
 
                     var x = e.clientX;
