@@ -11,9 +11,11 @@
             margin: 0;
             padding: 0;
         }
-        body{
+
+        body {
             overflow: hidden;
         }
+
         .icon {
             width: 1em;
             height: 1em;
@@ -21,55 +23,65 @@
             fill: currentColor;
             overflow: hidden;
         }
-        ul, ol{
+
+        ul,
+        ol {
             list-style: none;
         }
+
         #canvas {
             background-color: rgb(255, 255, 255);
         }
+
         .button-group {
             position: fixed;
             left: 20px;
             top: 20px;
             padding: 10px;
         }
+
         .button-group svg {
             width: 1.5em;
             height: 1.5em;
             margin-right: 15px;
             transition: all 0.2s;
         }
+
         .button-group svg.active {
             transform: scale(1.2);
             fill: rgb(255, 67, 67);
         }
+
         .brushes {
             position: fixed;
             top: 65px;
             left: 25px;
         }
-        .brushes ul{
-            
-        }
-        .brushes li{
+
+        .brushes ul {}
+
+        .brushes li {
             width: 25px;
             height: 25px;
-            margin-bottom:20px;
+            margin-bottom: 20px;
             border-radius: 50%;
             box-shadow: 0 2px 7px 0px rgb(79, 79, 79);
             transition: all 0.2s;
         }
 
-        #red{
+        #red {
             background-color: red;
         }
-        #black{
+
+        #black {
             background-color: #000;
         }
-        #blue{
+
+        #blue {
             background-color: rgb(0, 145, 255);
         }
-        .brushes li.active{
+
+        .brushes li.active {
             transform: scale(1.2);
         }
     </style>
@@ -227,27 +239,35 @@
         }
 
         // 切换笔刷颜色
-        black.onclick = function(e) {
+        black.onclick = function (e) {
             red.classList.remove('active');
             blue.classList.remove('active');
             black.classList.add('active');
             content.fillStyle = "#000";
             content.strokeStyle = "#000";
         }
-        red.onclick = function(e) {
+        red.onclick = function (e) {
             black.classList.remove('active');
             blue.classList.remove('active');
             red.classList.add('active');
             content.fillStyle = 'red';
             content.strokeStyle = 'red';
         }
-        blue.onclick = function(e) {
+        blue.onclick = function (e) {
             red.classList.remove('active');
             black.classList.remove('active');
             blue.classList.add('active');
             content.fillStyle = 'rgb(0, 145, 255)';
             content.strokeStyle = 'rgb(0, 145, 255)';
         }
+
+
+        function bodyScroll(event) {
+            event.preventDefault();
+        }
+        document.body.addEventListener('touchmove', bodyScroll, false);
+        $('body').css({ 'position': 'fixed', "width": "100%" });
+
     </script>
     <script src="//at.alicdn.com/t/font_857876_o4kf354m49d.js"></script>
 </body>
