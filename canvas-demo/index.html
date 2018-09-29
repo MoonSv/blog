@@ -1,28 +1,97 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Canvas-demo</title>
     <style>
-        *{
+        * {
             margin: 0;
             padding: 0;
         }
-        #canvas{
-            background-color: rgb(223, 223, 223);
+        body{
+            overflow: hidden;
         }
-        #eraser{
-            position: absolute;
-            left: 10px;
-            bottom: 10px;
+        .icon {
+            width: 1em;
+            height: 1em;
+            vertical-align: -0.15em;
+            fill: currentColor;
+            overflow: hidden;
+        }
+        ul, ol{
+            list-style: none;
+        }
+        #canvas {
+            background-color: rgb(255, 255, 255);
+        }
+        .button-group {
+            position: fixed;
+            left: 20px;
+            top: 20px;
+            padding: 10px;
+        }
+        .button-group svg {
+            width: 1.5em;
+            height: 1.5em;
+            margin-right: 15px;
+            transition: all 0.2s;
+        }
+        .button-group svg.active {
+            transform: scale(1.2);
+            fill: rgb(255, 67, 67);
+        }
+        .brushes {
+            position: fixed;
+            top: 65px;
+            left: 25px;
+        }
+        .brushes ul{
+            
+        }
+        .brushes li{
+            width: 25px;
+            height: 25px;
+            margin-bottom:20px;
+            border-radius: 50%;
+            box-shadow: 0 2px 7px 0px rgb(79, 79, 79);
+            transition: all 0.2s;
+        }
+
+        #red{
+            background-color: red;
+        }
+        #black{
+            background-color: #000;
+        }
+        #blue{
+            background-color: rgb(0, 145, 255);
+        }
+        .brushes li.active{
+            transform: scale(1.2);
         }
     </style>
 </head>
+
 <body>
     <canvas id="canvas"></canvas>
-    <button id="eraser">Eraser</button>
+    <div class="button-group" id="buttonGroup">
+        <svg id="brush" class="icon active" aria-hidden="true">
+            <use xlink:href="#icon-pencil"></use>
+        </svg>
+        <svg id="eraser" class="icon" aria-hidden="true">
+            <use xlink:href="#icon-eraser1"></use>
+        </svg>
+    </div>
+    <div class="brushes">
+        <ul>
+            <li id="black" class="active"></li>
+            <li id="red"></li>
+            <li id="blue"></li>
+        </ul>
+    </div>
     <script>
         // 初始化canvas画布
         initCanvas();
@@ -35,55 +104,152 @@
         content.fillStyle = brushColor;
 
         var onDrawing = false;
+        var isEraser = false;
+
         var prePosition = {};
-        canvas.onmousedown = function(e){
-            onDrawing = true;
-            var x = e.clientX;
-            var y = e.clientY;
-            prePosition = {'x': x, 'y': y};
-            drawCircle(x, y, brushWidth);
-        }
-        canvas.onmousemove = function(e){
-            if (onDrawing) {
+
+        // 检验touch事件是否可用
+        if ('ontouchstart' in document.body) {
+            canvas.ontouchstart = function (e) {
+                onDrawing = true;
+                var x = e.touches[0].clientX;
+                var y = e.touches[0].clientY;
+                if (isEraser) {
+                    content.clearRect(x - 5, y - 5, 10, 10);
+                } else {
+                    prePosition = { 'x': x, 'y': y };
+                    drawCircle(x, y, brushWidth);
+                }
+            }
+            canvas.ontouchmove = function (e) {
+                if (onDrawing) {
+                    var x = e.touches[0].clientX;
+                    var y = e.touches[0].clientY;
+                    if (isEraser) {
+                        content.clearRect(x - 5, y - 5, 10, 10);
+                        // drawLine(prePosition.x, prePosition.y, x-5, y-5)
+                    } else {
+                        drawCircle(x, y, brushWidth);
+                        drawLine(prePosition.x, prePosition.y, x, y)
+                    }
+                    prePosition = { 'x': x, 'y': y };
+                }
+            }
+            canvas.ontouchend = function (e) {
+                if (isEraser) {
+                    content.clearRect(x - 5, y - 5, 10, 10);
+                } else {
+                    var x = e.touches[0].clientX;
+                    var y = e.touches[0].clientY;
+                    drawCircle(x, y, brushWidth);
+                }
+                onDrawing = false;
+            }
+        } else { // touch事件不存在，监听mouse事件
+            canvas.onmousedown = function (e) {
+                onDrawing = true;
                 var x = e.clientX;
                 var y = e.clientY;
-                drawCircle(x, y, brushWidth);
-                drawLine(prePosition.x, prePosition.y, x, y)
-                prePosition = {'x': x, 'y': y};
+                if (isEraser) {
+                    content.clearRect(x - 5, y - 5, 10, 10);
+                } else {
+                    prePosition = { 'x': x, 'y': y };
+                    drawCircle(x, y, brushWidth);
+                }
             }
-        }
-        canvas.onmouseup = function(e){
-            onDrawing = false;;
-            var x = e.clientX;
-            var y = e.clientY;
-            drawCircle(x, y, brushWidth);
+            canvas.onmousemove = function (e) {
+                if (onDrawing) {
+                    var x = e.clientX;
+                    var y = e.clientY;
+                    if (isEraser) {
+                        content.clearRect(x - 5, y - 5, 10, 10);
+                        // drawLine(prePosition.x, prePosition.y, x-5, y-5)
+                    } else {
+                        drawCircle(x, y, brushWidth);
+                        drawLine(prePosition.x, prePosition.y, x, y)
+                    }
+                    prePosition = { 'x': x, 'y': y };
+                }
+            }
+            canvas.onmouseup = function (e) {
+                if (isEraser) {
+                    content.clearRect(x - 5, y - 5, 10, 10);
+                } else {
+
+                    var x = e.clientX;
+                    var y = e.clientY;
+                    drawCircle(x, y, brushWidth);
+                }
+                onDrawing = false;
+            }
         }
 
         // 改变窗口大小实时调整画布
-        window.onresize = function(){
+        window.onresize = function () {
             initCanvas();
         }
-        function initCanvas(){
+        function initCanvas() {
             var height = document.documentElement.clientHeight;
             var width = document.documentElement.clientWidth;
             canvas.height = height;
             canvas.width = width;
         }
-        function drawCircle(x, y, brushWidth){
+        function drawCircle(x, y, brushWidth) {
             content.beginPath();
             content.arc(x, y, brushWidth, 0, Math.PI * 2);
             content.closePath();
             content.fill();
         }
-        function drawLine(x, y, nx, ny){
+        function drawLine(x, y, nx, ny) {
             content.beginPath();
-            content.strokeStyle = "black";
-            content.lineWidth = brushWidth*2;
+            // content.strokeStyle = "black";
+            content.lineWidth = brushWidth * 2;
             content.moveTo(x, y)
             content.lineTo(nx, ny);
             content.closePath();
             content.stroke();
         }
+
+        // 切换画笔、橡皮状态 
+        // 点击eraser
+        eraser.onclick = function (e) {
+            isEraser = true;
+            buttonGroup.className = "button-group e";
+            brush.classList.remove('active');
+            eraser.classList.add('active');
+        }
+        // 点击brush
+        brush.onclick = function (e) {
+            isEraser = false;
+            buttonGroup.className = "button-group";
+            brush.classList.add('active');
+            eraser.classList.remove('active');
+        }
+
+        // 切换笔刷颜色
+        black.onclick = function(e) {
+            red.classList.remove('active');
+            blue.classList.remove('active');
+            black.classList.add('active');
+            content.fillStyle = "#000";
+            content.strokeStyle = "#000";
+        }
+        red.onclick = function(e) {
+            black.classList.remove('active');
+            blue.classList.remove('active');
+            red.classList.add('active');
+            content.fillStyle = 'red';
+            content.strokeStyle = 'red';
+        }
+        blue.onclick = function(e) {
+            red.classList.remove('active');
+            black.classList.remove('active');
+            blue.classList.add('active');
+            content.fillStyle = 'rgb(0, 145, 255)';
+            content.strokeStyle = 'rgb(0, 145, 255)';
+        }
     </script>
+    <script src="//at.alicdn.com/t/font_857876_o4kf354m49d.js"></script>
 </body>
+
 </html>
