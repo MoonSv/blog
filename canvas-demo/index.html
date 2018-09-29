@@ -28,9 +28,11 @@
         ol {
             list-style: none;
         }
-
         #canvas {
             background-color: rgb(255, 255, 255);
+            position: fixed;
+            top: 0;
+            left: 0;
         }
 
         .button-group {
@@ -260,14 +262,6 @@
             content.fillStyle = 'rgb(0, 145, 255)';
             content.strokeStyle = 'rgb(0, 145, 255)';
         }
-
-
-        function bodyScroll(event) {
-            event.preventDefault();
-        }
-        document.body.addEventListener('touchmove', bodyScroll, false);
-        $('body').css({ 'position': 'fixed', "width": "100%" });
-
     </script>
     <script src="//at.alicdn.com/t/font_857876_o4kf354m49d.js"></script>
 </body>
