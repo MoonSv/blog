@@ -189,6 +189,11 @@
         window.onload = function () {
             siteWelcome.classList.remove("active");
         }
+        let anchorTags = document.querySelectorAll('[data-x]');
+        for (let i = 0 ; i < anchorTags.length; i++){
+            anchorTags[i].classList.add('onshow');
+        }
+        getClosest();
         // 滚动式nav-bar样式改变
         window.onscroll = function (e) {
             if (scrollY > 0) {
@@ -196,6 +201,9 @@
             } else {
                 topNav.classList.remove("onscroll");
             }
+            getClosest()
+        }
+        function getClosest(){
             let anchorTags = document.querySelectorAll('[data-x]');
             let minValue = Math.abs(anchorTags[0].offsetTop - window.scrollY);
             let minIndex = 0;
@@ -205,15 +213,17 @@
                     minIndex = i;
                 }
             }
+            anchorTags[minIndex].classList.remove('onshow');
             let id = anchorTags[minIndex].id;
             let aTag = document.querySelector(`a[href="#${id}"]`);
             let liParent = aTag.parentNode;
             let siblings = liParent.parentNode.children;
             for(let i = 0; i < siblings.length; i++) {
-                siblings[i].classList.remove('active');
+                siblings[i].classList.remove('highLight');
             }
-            liParent.classList.add('active');
+            liParent.classList.add('highLight');
         }
+
         // 点击滚动位置
         // Setup the animation loop.
         function animate(time) {
