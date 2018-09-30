@@ -25,15 +25,25 @@ ul, ol{
     clear: both;
 }
 
+/* 导航栏 */
+.top-nav-bar.onscroll{
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    /* padding: 10px 0; */
+    color: rgb(82, 82, 82);
+}
 .top-nav-bar-inner{
     padding: 0 16px;
 
 }
-
 .top-nav-bar{
-    margin: 20px 0px;
+    padding: 20px 0;
     width: 100%;
+    color: #B7B7B7;
     position: fixed;
+    top:0;
+    z-index: 1;
+    transition: all 0.3s;
 }
 .top-nav-bar nav>ul{
     list-style: none;
@@ -45,7 +55,7 @@ ul, ol{
     margin: 0 17px;
 }
 .top-nav-bar nav>ul>li>a{
-    color: #B7B7B7;
+    color: inherit;
     font-size: 12px;
     font-weight: bold;
     border-top: 3px solid transparent;
