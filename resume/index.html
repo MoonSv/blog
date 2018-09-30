@@ -15,7 +15,8 @@
             fill: currentColor;
             overflow: hidden;
         }
-        .site-welcome{
+
+        .site-welcome {
             position: fixed;
             width: 100%;
             height: 100%;
@@ -26,7 +27,8 @@
             z-index: 2;
             display: none;
         }
-        .site-welcome.active{
+
+        .site-welcome.active {
             display: flex;
         }
     </style>
@@ -66,7 +68,7 @@
         <div class="mask"></div>
     </div>
     <main style="margin-top: -340px;">
-        <div id="siteAbout" class="user-card">
+        <div data-x id="siteAbout" class="user-card">
             <div class="picture-and-text clearfix">
                 <div class="picture">
                     <img src="./img/IMG_6049.JPG" width=299 height=347 style="object-fit:cover;" alt="avatar">
@@ -112,12 +114,13 @@
         <p class="download-wrapper">
             <a href="./img/IMG_6049.JPG" class="download" target="_blank" download>DOWNLOAD RESUME</a>
         </p>
-        <p class="self-description">Jiaqi Wang, Marjor in Computer Science, Master degree from University of New South Wales<br>
-           Skills: HTML5, CSS3, Javascript, ReactJs, VueJs<br>
-           Photographer, Open Water Diver.
+        <p class="self-description">Jiaqi Wang, Marjor in Computer Science, Master degree from University of New South
+            Wales<br>
+            Skills: HTML5, CSS3, Javascript, ReactJs, VueJs<br>
+            Photographer, Open Water Diver.
         </p>
     </main>
-    <section id="siteSkills" class="skills">
+    <section data-x id="siteSkills" class="skills">
         <h2>Skills</h2>
         <ol class="clearfix">
             <li>HTML 5 &amp; CSS 3
@@ -126,33 +129,33 @@
                 </div>
             </li>
             <li>JavaScript
-                    <div class="progress-bar">
-                            <div class="progress"></div>
-                        </div>
+                <div class="progress-bar">
+                    <div class="progress"></div>
+                </div>
             </li>
             <li>jQuery
-                    <div class="progress-bar">
-                            <div class="progress"></div>
-                        </div>
+                <div class="progress-bar">
+                    <div class="progress"></div>
+                </div>
             </li>
             <li>Vue
-                    <div class="progress-bar">
-                            <div class="progress"></div>
-                        </div>
+                <div class="progress-bar">
+                    <div class="progress"></div>
+                </div>
             </li>
             <li>React
-                    <div class="progress-bar">
-                            <div class="progress"></div>
-                        </div>
+                <div class="progress-bar">
+                    <div class="progress"></div>
+                </div>
             </li>
             <li>HTTP
-                    <div class="progress-bar">
-                            <div class="progress"></div>
-                        </div>
+                <div class="progress-bar">
+                    <div class="progress"></div>
+                </div>
             </li>
         </ol>
     </section>
-    <section id="sitePortfolio" class="portfolio">
+    <section data-x id="sitePortfolio" class="portfolio">
         <h2>Portfolio</h2>
         <nav>
             <ol class="clearfix">
@@ -165,13 +168,13 @@
             </div>
         </nav>
         <script>
-            portfolio1.onclick = function(){
+            portfolio1.onclick = function () {
                 portfolioBar.className = "bar bar-style1";
             }
-            portfolio2.onclick = function(){
+            portfolio2.onclick = function () {
                 portfolioBar.className = "bar bar-style2";
             }
-            portfolio3.onclick = function(){
+            portfolio3.onclick = function () {
                 portfolioBar.className = "bar bar-style3";
             }
         </script>
@@ -181,53 +184,90 @@
             <div class="small"></div>
         </div>
     </section>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tween.js/17.2.0/Tween.min.js"></script>
     <script>
-        window.onload = function(){ 
+        window.onload = function () {
             siteWelcome.classList.remove("active");
         }
         // 滚动式nav-bar样式改变
-        window.onscroll = function(e){
-            if (scrollY > 0){
+        window.onscroll = function (e) {
+            if (scrollY > 0) {
                 topNav.classList.add("onscroll");
             } else {
                 topNav.classList.remove("onscroll");
             }
+            let anchorTags = document.querySelectorAll('[data-x]');
+            let minValue = Math.abs(anchorTags[0].offsetTop - window.scrollY);
+            let minIndex = 0;
+            for (let i = 0 ; i < anchorTags.length; i++){
+                let distance = Math.abs(anchorTags[i].offsetTop - window.scrollY);
+                if (distance < minValue) {
+                    minIndex = i;
+                }
+            }
+            let id = anchorTags[minIndex].id;
+            let aTag = document.querySelector(`a[href="#${id}"]`);
+            let liParent = aTag.parentNode;
+            let siblings = liParent.parentNode.children;
+            for(let i = 0; i < siblings.length; i++) {
+                siblings[i].classList.remove('active');
+            }
+            liParent.classList.add('active');
         }
         // 点击滚动位置
+        // Setup the animation loop.
+        function animate(time) {
+            requestAnimationFrame(animate);
+            TWEEN.update(time);
+        }
+        requestAnimationFrame(animate);
         var aTags = document.querySelectorAll('#topNav nav ul li a');
-        for (let i = 0; i < aTags.length; i ++ ){
+        for (let i = 0; i < aTags.length; i++) {
             let href = aTags[i].getAttribute('href');
-            if (href.charAt(0) === "#"){
-                aTags[i].onclick = function(e) {
+            if (href.charAt(0) === "#") {
+                aTags[i].onclick = function (e) {
                     e.preventDefault();
                     let targetEle = document.querySelector(href);
                     let scrollTo = targetEle.offsetTop - 80;
                     // 缓动滚动效果
-                    let n = 30;
-                    let duration = 200;
-                    let step = (scrollTo - window.scrollY) / n;
-                    console.log(step);
-                    let i = 0;
-                    let id = setInterval(()=>{
-                        i += 1;
-                        if (i === n) {
-                            window.clearInterval(id);
-                        }
-                        window.scrollTo(0, window.scrollY + step);
-                    }, duration/n)
+                    // let n = 30;
+                    // let duration = 200;
+                    // let step = (scrollTo - window.scrollY) / n;
+                    // let i = 0;
+                    // let id = setInterval(() => {
+                    //     i += 1;
+                    //     if (i === n) {
+                    //         window.clearInterval(id);
+                    //     }
+                    //     window.scrollTo(0, window.scrollY + step);
+                    // }, duration / n)
+                    let duration = (scrollTo - window.scrollY) / 100;
+                    if ( duration > 500 ) {
+                        duration = 500;
+                    }
+                    var coords = { x: window.scrollY }; // Start at (0, 0)
+                    var tween = new TWEEN.Tween(coords) // Create a new tween that modifies 'coords'.
+                        .to({ x: scrollTo }, 500) // Move to (300, 200) in 1 second.
+                        .easing(TWEEN.Easing.Quadratic.InOut) // Use an easing function to make the animation smooth.
+                        .onUpdate(function () { // Called after tween.js updates 'coords'.
+                            window.scrollTo(0, coords.x);
+                            // console.log(coords.x)
+                        })
+                        .start(); // Start the tween immediately.
                 }
             }
         }
         // submenu
         let liList = document.querySelectorAll('#topNav nav>ul>li');
         for (let i = 0; i < liList.length; i++) {
-            liList[i].onmouseenter = function(e){
+            liList[i].onmouseenter = function (e) {
                 this.classList.add('active');
             }
-            liList[i].onmouseleave = function(e){
+            liList[i].onmouseleave = function (e) {
                 this.classList.remove('active');
             }
         }
     </script>
 </body>
+
 </html>
