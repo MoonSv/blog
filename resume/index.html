@@ -201,19 +201,33 @@
                 aTags[i].onclick = function(e) {
                     e.preventDefault();
                     let targetEle = document.querySelector(href);
-                    var scrollTo = targetEle.offsetTop - 80;
-                    window.scrollTo(0, scrollTo);
+                    let scrollTo = targetEle.offsetTop - 80;
+                    // 缓动滚动效果
+                    let n = 30;
+                    let duration = 200;
+                    let step = (scrollTo - window.scrollY) / n;
+                    console.log(step);
+                    let i = 0;
+                    let id = setInterval(()=>{
+                        i += 1;
+                        if (i === n) {
+                            window.clearInterval(id);
+                        }
+                        window.scrollTo(0, window.scrollY + step);
+                    }, duration/n)
                 }
             }
         }
         // submenu
-        navDemo.onmouseenter = function(e){
-            this.classList.add('active');
-        }
-        navDemo.onmouseleave = function(e){
-            this.classList.remove('active');
+        let liList = document.querySelectorAll('#topNav nav>ul>li');
+        for (let i = 0; i < liList.length; i++) {
+            liList[i].onmouseenter = function(e){
+                this.classList.add('active');
+            }
+            liList[i].onmouseleave = function(e){
+                this.classList.remove('active');
+            }
         }
     </script>
 </body>
-
 </html>
