@@ -26,12 +26,12 @@ ul, ol{
 }
 
 [data-x] {
-    transition: all 1s;
+    transition: all 0.8s;
     opacity: 1;
     transform: translateY(0);
 }
 [data-x].onshow {
-    opacity: 0;;
+    opacity: 0;
     transform: translateY(20%);
 }
 /* 导航栏 */
@@ -286,12 +286,36 @@ section.skills .progress-bar{
     border-radius: 2px;
     background-color: #fae1e1;
     margin: 4px 0 40px;
+    overflow: hidden;
+}
+section.skills.onshow .progress{
+    transform: translateX(-100%);
 }
 section.skills .progress{
     height: 100%;
     border-radius: 2px;
-    width: 50%;
     background-color: #e06567;
+    transform: translateX(0);
+    transition: all 1s;
+}
+section.skills li:nth-child(1) .progress{
+    width: 80%;
+}
+section.skills li:nth-child(2) .progress{
+
+    width: 80%;
+}
+section.skills li:nth-child(3) .progress{
+    width: 76%;
+}
+section.skills li:nth-child(4) .progress{
+    width: 70%;
+}
+section.skills li:nth-child(5) .progress{
+    width: 75%;
+}
+section.skills li:nth-child(6) .progress{
+    width: 66%;
 }
 section.portfolio{
     margin-bottom: 50px;
