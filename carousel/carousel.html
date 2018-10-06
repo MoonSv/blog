@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>轮播图</title>
+    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.0.js"></script>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .imgs{
+            display: flex;
+            transition: all 0.5s;
+        }
+        .imgs > .img-wrap{
+            width: 400px;
+            height: 300px;
+            
+            overflow: hidden;
+        }
+        .imgs img{
+            max-height: 300px;
+        }
+        .window{
+            display: flex;
+            width: 400px;
+            height: 300px;
+            overflow: hidden;
+            margin: 30px auto;
+            align-items: center;
+            border-radius: 15px;
+        }
+        .button-group{
+            display: flex;
+            justify-content: center
+        }
+        button{
+            padding: 5px 20px;
+            margin: 0 10px;
+            border-radius:5px;
+            outline: none;
+        }
+        button.active{
+            box-shadow: 0 0 5px grey;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="window">
+        <div class="imgs">
+            <div class='img-wrap'><img src="./img/cloud9_1.jpg" alt=""></div>
+            <div class='img-wrap'><img src="./img/FijiGold.jpg" alt=""></div>
+            <div class='img-wrap'><img src="./img/公交司机.jpg" alt=""></div>
+            <div class='img-wrap'><img src="./img/沙滩橄榄1.jpg" alt=""></div>
+            <div class='img-wrap'><img src="./img//沙滩橄榄3.jpg" alt=""></div>
+        </div>
+        
+    </div>
+    <div class="button-group">
+            <button class="active">1</button>
+            <button>2</button>
+            <button>3</button>
+            <button>4</button>
+            <button>5</button>
+    </div>
+    <script>
+        let buttonGroup = $('.button-group button');
+        for (let i = 0; i < buttonGroup.length; i++) {
+            $(buttonGroup[i]).on('click', function(){
+                $('.imgs').css('transform', `translate(-${i * 400}px)`);
+                $(this).siblings().removeClass('active');
+                $(this).addClass('active');
+            })
+        }
+        let n = 1
+        
+        function start(){
+            return setInterval(function(){
+                let index = n % 5;
+                $('.button-group button').eq(index).trigger('click');
+                n += 1;
+            }, 3000);
+        }
+        
+        // 鼠标移入时销毁定时器
+        $('.imgs').on('mouseenter',function(){
+            window.clearInterval(timeId);
+        })
+        $('.imgs').on('mouseleave',function(){
+            timeId = start();
+        })
+        let timeId = start();
+    </script>
+</body>
+</html>
