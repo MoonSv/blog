@@ -74,9 +74,11 @@
                 $('.imgs').css('transform', `translate(-${i * 400}px)`);
                 $(this).siblings().removeClass('active');
                 $(this).addClass('active');
+                // 记录当前点击的button
                 n = i;
             })
         }
+
         let n = 1
         
         function start(){

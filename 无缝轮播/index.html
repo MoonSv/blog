@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs
+/jquery/1.4.0/jquery.min.js"></script>
+    <style>
+        .window{
+            height: 400px;
+            width: 600px;
+            margin: 0 auto;
+        }
+        .img-wrap{
+            /* border: 5px solid red; */
+            border-radius: 5px;
+            height: 400px;
+            width: 600px;
+            overflow: hidden;
+            position: relative;
+        }
+        img{
+            position: absolute;
+            width: 600px;
+            height: 400px;
+            transition: all 1.5s;
+        }
+        img.enter{
+            transform: translateX(100%);
+        }
+        img.leave{
+            transform: translateX(-100%);
+        }
+        img.current{
+            transform: translateX(0);
+            z-index: 1;
+        }
+        
+    </style>
+</head>
+
+<body>
+    <div class="window">
+        <div class="img-wrap">
+            <img src="./img/cloud9_1.jpg" alt="">
+            <img src="./img/FijiGold.jpg" alt="">
+            <img src="./img/公交司机.jpg" alt="">
+            <img src="./img/沙滩橄榄1.jpg" alt="">
+            <img src="./img/沙滩橄榄3.jpg" alt="">
+        </div>
+    </div>
+    <script>
+        let numOfImg = $(".img-wrap img").size();
+        let getIndex = (n) => {
+            
+            return n % 5 === 0?5:n%5;
+        }
+        initImg();
+        function initImg(){
+            $(".img-wrap img:nth-child(1)").addClass("current");
+            for(let i = 2; i < numOfImg+1; i ++){
+                $(`.img-wrap img:nth-child(${i})`).addClass("enter");
+            }
+        }
+        let n = 1;
+        setInterval(function(){
+            $(`.img-wrap img:nth-child(${getIndex(n)})`).removeClass("current").addClass("leave").one('transitionend', (e)=>{
+                $(e.currentTarget).removeClass("leave").addClass("enter");
+            });
+            $(`.img-wrap img:nth-child(${getIndex(n+1)})`).removeClass("enter").addClass("current");
+            n++; 
+        }, 3000);
+        console.log(getIndex(6))
+    </script>
+</body>
+</html>
