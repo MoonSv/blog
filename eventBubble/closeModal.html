@@ -52,15 +52,15 @@
         </div>
     </div>
     <script>
-        // $(".wrapper").click(function(e){
-        //     e.stopPropagation();
-        //     $(".modal").show();
-        // })
-        // $("html").click(function(){
-        //     $(".modal").hide();
-        // })
+        $(".wrapper").click(function(e){
+            e.stopPropagation();
+            $(".modal").show();
+        })
+        $("html").click(function(){
+            $(".modal").hide();
+        })
         
-        // $(".wrapper").on('click', function(){
+        // $(".click").on('click', function(){
         //     $(".modal").show();
         //     setTimeout(function(){
         //         $(document).one('click', function(){
@@ -68,14 +68,6 @@
         //         })
         //     }, 0) 
         // })
-        
-        $(".wrapper").on('click', function(){
-            $(".modal").show();
-            $(document).one('click', function(){
-                $(".modal").hide();
-            })
-        })
-
     </script>
 </body>
 </html>
