@@ -56,6 +56,10 @@
             e.stopPropagation();
             $(".modal").show();
         })
+        $(".click").on('click', (e)=>{
+            e.stopPropagation();
+            $(".modal").toggle();
+        })
         $("html").click(function(){
             $(".modal").hide();
         })

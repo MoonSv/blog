@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>我的页面</title>
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" media="print" href="/print.css">
+    <link rel="stylesheet" media="(max-width:500px)" href="/mobile.css">
+</head>
+<body>
+        <!-- 页面标题为「我的页面」
+        页面中引入了一个外部 CSS 文件，文件路径为 /style.css
+        页面中引入了另一个外部 CSS 文件，路径为 /print.css，该文件仅在打印时生效
+        页面中引入了另一个外部 CSS 文件，路径为 /mobile.css，该文件仅在设备宽度小于 500 像素时生效
+        页面中引入了一个外部 JS 文件，路径为 /main.js
+        页面中引入了一个外部 JS 文件，路径为 /gbk.js，文件编码为 GBK
+        页面中有一个 SVG 标签，SVG 里面有一个直径为 100 像素的圆圈，颜色随意
+        注意题目中的路径 -->
+        <svg width="300" height="300" version="1.1">
+            <circle cx="150" cy="150" r="100" stroke="darkred" stroke-width="2" fill="darkred"/>
+        </svg>
+    <script src="/main.js"></script>
+    <script src="/gbk.js" charset="GBK"></script>
+</body>
+</html>
