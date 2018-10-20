@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script type="text/javascript" src="./jQuery-3.3.1.js"></script>
+    <style>
+        .wrapper{
+            position: relative;
+            display: inline-block;
+            transition: all 0.3s;
+        }
+        .modal{
+            border: 1px solid grey;
+            border-radius: 5px;
+            position: absolute;
+            left: 100%;
+            top: 0;
+            white-space: nowrap;
+            padding: 10px;
+            margin-left: 10px;
+            display: none;
+        }
+        .modal::before{
+            content: '';
+            border: 10px solid transparent;
+            border-right: 10px solid grey;
+            position: absolute;
+            right: 100%;
+            top: 3px;
+        }
+        .modal::after{
+            content: '';
+            border: 10px solid transparent;
+            border-right: 10px solid #fff;
+            position: absolute;
+            right: 100%;
+            top: 3px;
+            margin-right: -1px;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <button class="click">
+            click me
+        </button>
+        <div class="modal">
+            This is the modal content
+        </div>
+    </div>
+    <script>
+        // $(".wrapper").click(function(e){
+        //     e.stopPropagation();
+        //     $(".modal").show();
+        // })
+        // $("html").click(function(){
+        //     $(".modal").hide();
+        // })
+        
+        // $(".wrapper").on('click', function(){
+        //     $(".modal").show();
+        //     setTimeout(function(){
+        //         $(document).one('click', function(){
+        //             $(".modal").hide();
+        //         })
+        //     }, 0) 
+        // })
+        
+        $(".wrapper").on('click', function(){
+            $(".modal").show();
+            $(document).one('click', function(){
+                $(".modal").hide();
+            })
+        })
+
+    </script>
+</body>
+</html>

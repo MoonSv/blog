@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./jQuery-3.3.1.js"></script>
+    <style>
+        
+        .red{
+            background-color: rgb(255, 107, 107);
+            width: 20vw;
+            height: 20vw;
+        }
+        .orange{
+            background-color: rgb(255, 207, 118);
+        }
+        .blue{
+            background-color: rgb(109, 160, 255);
+        }
+        .green{
+            background-color: green;
+        }
+        .cyan{
+            background-color: rgb(138, 255, 255);
+        }
+        .purple{
+            background-color: rgb(160, 80, 160);
+        }
+        .yellow{
+            background-color: rgb(255, 255, 168);
+        }
+        div{
+            padding: 20px;
+            border: 1px solid lightgrey;
+            transition: all 0.8s;
+            border-radius: 50%;
+            display: flex;
+            flex: 1;
+        }
+        div.active{
+            background-color: #fff;
+        }
+    </style>
+</head>
+<body>
+    
+        <div class="red active">
+            <div class="orange active">
+                <div class="yellow active">
+                    <div class="green active">
+                        <div class="cyan active">
+                            <div class="blue active">
+                                <div class="purple active"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+    <script>
+        let n = 0;
+        $("div").on('click', function(e){
+            setTimeout(function(){
+                $(e.currentTarget).toggleClass('active');
+            }, n * 100)
+            n += 1;
+        })
+    </script>
+</body>
+</html>

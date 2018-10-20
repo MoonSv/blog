@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        ul, li{
+            list-style: none;
+        }
+        .wrapper{
+            /* display: flex; */
+            position: relative;
+            width: 800px;
+            height: 450px;
+            overflow: hidden;
+            margin: 50px auto;
+        }
+        .previous{
+            box-sizing: border-box;
+            width: 60px;
+            height: 60px;
+            border: 60px solid transparent;
+            border-right: 60px solid rgba(128, 128, 128, 0.651);
+            position: absolute;
+            top: 50%;
+            left: -30px;
+            transform: translateY(-50%);
+            cursor: pointer;
+            z-index: 1;
+        }
+        .next{
+            box-sizing: border-box;
+            width: 60px;
+            height: 60px;
+            border: 60px solid transparent;
+            border-left: 60px solid rgba(192, 192, 192, 0.651);
+            position: absolute;
+            top: 50%;
+            right: -30px;
+            transform: translateY(-50%);
+            cursor: pointer;
+            z-index: 1;
+        }
+        .img-wrapper{
+            display: flex;
+            transition: all 1.5s;
+        }
+        img{
+            width: 800px;
+            height: 450px;
+            /* float: left; */
+        }
+        .clearfix{
+            content: '';
+            display: block;
+            clear: both
+        }
+        .button-wrapper{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .button-group{
+            /* text-align: center */
+        }
+        .button-group > li{
+            float: left;
+            width: 70px;
+            height: 30px;
+            /* border: 1px solid red; */
+            padding: 5px;
+            margin: 0 10px;
+            line-height: 30px;
+            text-align: center;
+            border-radius: 3px;
+            cursor: pointer;
+            background-color: rgb(165, 188, 195);
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper clearfix">
+        <div class="previous"></div>
+        <div class="next"></div>
+        <div class="img-wrapper">
+            <img src="./img/沙滩橄榄3.jpg" alt="img">
+            <img src="./img/沙滩橄榄1.jpg" alt="img">
+            <img src="./img/公交司机.jpg" alt="img">
+            <img src="./img/FijiGold.jpg" alt="img">
+            <img src="./img/cloud9_1.jpg" alt="img">
+        </div>
+    </div>
+    <div class="button-wrapper">
+        <ul class="button-group clearfix">
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+            <li>5</li>
+        </ul>
+    </div>
+
+    <script src="./../eventBubble/jQuery-3.3.1.js"></script>
+    <script>
+        let numOfImg = $("img").length;
+        let buttons = $(".button-group > li");
+        let currentIndex = 1;
+        initImg();
+
+        $(".button-group").on('click', 'li', e=> {
+            let button = e.currentTarget;
+            let index = $(button).index()+1;
+            jumpTo(boundIndex(index));
+        })
+        $(".previous").on('click', ()=>{
+            jumpTo(boundIndex(currentIndex - 1));
+        })
+        $(".next").on('click', ()=>{
+            jumpTo(boundIndex(currentIndex + 1));
+        })
+
+        let timer = setInterval(function(){
+            jumpTo(boundIndex(currentIndex+1));
+        },2000)
+        $(".wrapper").on('mouseenter', ()=>{
+            window.clearInterval(timer)
+        })
+        $(".wrapper").on('mouseleave', ()=>{
+            timer = setInterval(function(){
+                jumpTo(boundIndex(currentIndex+1));
+            },2000)
+        })
+
+        function jumpTo(index){
+            // put the change of currentIndex inside this function
+            // from the first img jump to the last img
+            console.log('current', 'index');
+            console.log(currentIndex, index);
+            if(currentIndex === 1 && index === numOfImg){
+                console.log('pre')
+                index = 0;
+                currentIndex = numOfImg;
+                $(".img-wrapper").css("transform", `translateX(-${index * 800}px)`).one('transitionend', function(){
+                    $(".img-wrapper").hide().offset()
+                    $(".img-wrapper").css("transform", `translateX(-${numOfImg * 800}px)`).show();
+                })
+            } else if(currentIndex === numOfImg && index === 1) {// from the last img jump to the first img
+                console.log('next')
+                index = numOfImg+1;
+                currentIndex = 1;
+                $(".img-wrapper").css("transform", `translateX(-${index * 800}px)`).one('transitionend', function(){
+                    $(".img-wrapper").hide().offset()
+                    $(".img-wrapper").css("transform", `translateX(-${1 * 800}px)`).show();
+                })
+            } else {
+                currentIndex = index;
+                $(".img-wrapper").css("transform", `translateX(-${index * 800}px)`)
+            }
+        }
+        function boundIndex(index){
+            if (index > numOfImg) {
+                index = 1;
+            }
+            if (index < 1) {
+                index = numOfImg;
+            }
+            return index;
+        }
+        function initImg(){
+            let firstImg = $(".img-wrapper > img").eq(0).clone(true);
+            let lastImg = $(".img-wrapper > img").eq(numOfImg-1).clone(true);
+            $(".img-wrapper").append(firstImg);
+            $(".img-wrapper").prepend(lastImg);
+            $(".img-wrapper").css("transform", `translateX(-${1 * 800}px)`)
+        }
+    </script>
+</body>
+</html>
