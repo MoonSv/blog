@@ -5,17 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user=scalable=no, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <style>
+        @media(max-width:414px){
+            body{
+                background-color: grey;
+            }
+        }
+        .rect{
+            width: 150px;
+            height: 80px;
+            background-color: red;
+            border-radius: 8px;
+            box-shadow: 0 0 10px 0px grey;
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <div class="logo"></div>
-        <ul>
-            <li><a href="#">nav1</a></li>
-            <li><a href="#">nav2</a></li>
-            <li><a href="#">nav3</a></li>
-            <li><a href="#">nav4</a></li>
-            <li><a href="#">nav5</a></li>
-        </ul>
-    </header>
+    <div class="rect"></div>
 </body>
 </html>

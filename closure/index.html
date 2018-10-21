@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 在tmp中可以读取f1的数据，这是闭包的用途之一
+        function f1 (){
+            var n = 10;
+            function f2(){
+                console.log(n);
+            }
+            return f2;
+        }
+        var tmp = f1();
+        tmp();
+
+        function f3(){
+            var n = 0;
+            function f4(){
+                n ++;
+                console.log(n)
+            }
+            return f4;
+        }
+        var tmp1 = f3();
+        tmp1(); // 1
+        tmp1(); // 2
+        tmp1(); // 3
+        tmp1(); // 4
+    </script>
+</body>
+</html>
