@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // first version of AJAX without return Promise
+        window.jQuery.ajax = function ({ method, url, body, success, fail }) {
+            let xhr = new XMLHttpRequest();
+            xhr.open(method, url);
+            xhr.onreadystatechange = function (response) {
+                if (xhr.readyState === 4) {
+                    if (xhr.status === 200) {
+                        success.call(undefined, xhr.responseText);
+                    } else {
+                        fail.call(undefined, xhr);
+                    }
+                }
+            }
+            xhr.send(body);
+        }
+        // second version of AJAX with return Promise
+        window.jQuery.ajax = function ({ method, url, body }) {
+            return new Promise(function (resolve, reject) {
+                let xhr = new XMLHttpRequest();
+                xhr.open(method, url);
+                xhr.onreadystatechange = function (response) {
+                    if (xhr.readyState === 4) {
+                        if (xhr.status === 200) {
+                            resolve.call(undefined, xhr.responseText);
+                        } else {
+                            reject.call(undefined, xhr);
+                        }
+                    }
+                }
+                xhr.send(body);
+            })
+        }
+    </script>
+</body>
+
+</html>

@@ -7,6 +7,8 @@
     <title>Moon's Resume</title>
     <link rel="stylesheet" href="./main.css">
     <link rel="stylesheet" href="./loading.css">
+    <link rel="stylesheet" href="./node_modules/swiper/dist/css/swiper.min.css">
+    <script src="node_modules/swiper/dist/js/swiper.min.js"></script>
     <script src="https://at.alicdn.com/t/font_851746_d9tzahmzp75.js"></script>
     <style type="text/css">
         .icon {
@@ -158,7 +160,7 @@
     </section>
     <section data-x id="sitePortfolio" class="portfolio">
         <h2>Portfolio</h2>
-        <nav>
+        <!-- <nav>
             <ol class="clearfix">
                 <li id="portfolio1">ALL</li>
                 <li id="portfolio2">FRAME</li>
@@ -183,15 +185,61 @@
             <div class="big"></div>
             <div class="small"></div>
             <div class="small"></div>
+        </div> -->
+        <style>
+            .swiper-container {
+                width: 700px;
+                height: 450px;
+            }
+        </style>
+        <!-- Slider main container -->
+        <div class="swiper-container">
+            <!-- Additional required wrapper -->
+            <div class="swiper-wrapper">
+                <!-- Slides -->
+                <img class="swiper-slide" src="./img/swiper-img/canvas-demo.jpg" alt="">
+                <img class="swiper-slide" src="./img/swiper-img/keyboard.jpg" alt="">
+                <img class="swiper-slide" src="./img/swiper-img/slide-demo.jpg" alt="">
+            </div>
+            <!-- If we need pagination -->
+            <div class="swiper-pagination"></div>
+
+            <!-- If we need navigation buttons -->
+            <div class="swiper-button-prev swiper-button-white"></div>
+            <div class="swiper-button-next swiper-button-white"></div>
         </div>
+
     </section>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tween.js/17.2.0/Tween.min.js"></script>
+
     <script>
+        console.log(window.Swiper);
+    </script>
+
+    <script>
+        // inital swiper
+        var mySwiper = new Swiper('.swiper-container', {
+            // Optional parameters
+            loop: true,
+
+            // If we need pagination
+            pagination: {
+                el: '.swiper-pagination',
+            },
+
+            // Navigation arrows
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            autoplay: true,
+        })
+        // remove loading status when loaded
         window.onload = function () {
             siteWelcome.classList.remove("active");
         }
         let anchorTags = document.querySelectorAll('[data-x]');
-        for (let i = 0 ; i < anchorTags.length; i++){
+        for (let i = 0; i < anchorTags.length; i++) {
             anchorTags[i].classList.add('onshow');
         }
         getClosest();
@@ -204,11 +252,11 @@
             }
             getClosest();
         }
-        function getClosest(){
+        function getClosest() {
             let anchorTags = document.querySelectorAll('[data-x]');
             let minValue = Math.abs(anchorTags[0].offsetTop - window.scrollY);
             let minIndex = 0;
-            for (let i = 0 ; i < anchorTags.length; i++){
+            for (let i = 0; i < anchorTags.length; i++) {
                 let distance = Math.abs(anchorTags[i].offsetTop - window.scrollY);
                 if (distance < minValue) {
                     minIndex = i;
@@ -219,7 +267,7 @@
             let aTag = document.querySelector(`a[href="#${id}"]`);
             let liParent = aTag.parentNode;
             let siblings = liParent.parentNode.children;
-            for(let i = 0; i < siblings.length; i++) {
+            for (let i = 0; i < siblings.length; i++) {
                 siblings[i].classList.remove('highLight');
             }
             liParent.classList.add('highLight');
@@ -253,7 +301,7 @@
                     //     window.scrollTo(0, window.scrollY + step);
                     // }, duration / n)
                     let duration = (scrollTo - window.scrollY) / 100;
-                    if ( duration > 500 ) {
+                    if (duration > 500) {
                         duration = 500;
                     }
                     var coords = { x: window.scrollY }; // Start at (0, 0)
