@@ -11,13 +11,13 @@ let myForm = document.querySelector("#postMessageForm");
 console.log(myForm);
 myForm.addEventListener('submit', function (e) {
     e.preventDefault();
-    let content = myForm.querySelector('input[type=text]').value;
+    let content = myForm.querySelector('input[name=content]').value;
     if (content) {
         console.log(content);
         var Message = AV.Object.extend('Message');
         var message = new Message();
         message.save({
-            content: content
+            'comment': content
         }).then(function (object) {
             alert('Post successfully!');
         });
