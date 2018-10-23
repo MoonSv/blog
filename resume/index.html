@@ -208,9 +208,22 @@
             <div class="swiper-button-prev swiper-button-white"></div>
             <div class="swiper-button-next swiper-button-white"></div>
         </div>
-
+        <section id="sitePostMessage" class="comments">
+            <h2>Comments</h2>
+            <p id="commentError">The comment should not be empty</p>
+            <form id="postMessageForm" action="">
+                <input id="postMessageInput" type="text"/>
+                <input id="postMessageButton" type="submit" value="Post"/>   
+            </form>
+        </section>
     </section>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tween.js/17.2.0/Tween.min.js"></script>
+    
+    <!-- 存储服务 -->
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.10.0/dist/av-min.js"></script>
+    <!-- 实时消息服务 -->
+    <script src="//cdn.jsdelivr.net/npm/leancloud-realtime@4.2.0/dist/realtime.browser.min.js"></script>
+    <script src="./js/leanCloud.js"></script>
 
     <script>
         console.log(window.Swiper);
