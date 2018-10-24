@@ -210,9 +210,13 @@
         </div>
         <section id="sitePostMessage" class="comments">
             <h2>Comments</h2>
-            <p id="commentError">The comment should not be empty</p>
+            <ol id="commentsList"></ol>
+            <p id="commentError">Please add a nickname say something ^^</p>
             <form id="postMessageForm" action="">
-                <input id="postMessageInput" type="text" name="content"/>
+                <label for="authorInput">Nickname</label>
+                <input id="authorInput" type="text" name="author"/>
+                <label for="contentInput">Comment</label>
+                <input id="contentInput" type="text" name="content"/>
                 <input id="postMessageButton" type="submit" value="Post"/>   
             </form>
         </section>

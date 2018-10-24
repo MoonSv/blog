@@ -376,14 +376,19 @@ section.comments{
 section.comments #postMessageForm{
     margin: 30px 0;
 }
-section.comments #postMessageInput{
+section.comments input[type=text]{
     padding: 12px;
     border: 1px solid #fff;
     border-radius: 5px;
-    margin: 0 20px;
-    width: 400px;
+    margin: 0 20px 0 5px;
     font-size: inherit;
     outline: none;
+}
+section.comments #authorInput{
+    width: 120px;
+}
+section.comments #contentInput{
+    width: 250px;
 }
 section.comments #postMessageButton{
     display: inline-block;
@@ -395,6 +400,7 @@ section.comments #postMessageButton{
     color: #fff;
     font-weight: 600;
     outline: none;
+    cursor: pointer;
 }
 section.comments #commentError{
     position: absolute;
@@ -410,4 +416,26 @@ section.comments #commentError{
 }
 section.comments #commentError.active{
     opacity: 1;
+}
+section.comments #commentsList{
+    width: 700px;
+    margin: 10px auto;
+    padding: 15px;
+    color: #313131;
+    border-radius: 5px;
+}
+section.comments #commentsList li{
+    text-align: left;
+    padding: 15px 10px;
+    border-bottom: 1px solid #bfbfbf;
+    transition: all 0.3s;
+    border-radius: 5px 5px 0px 0px;
+}
+section.comments #commentsList li:hover{
+    background-color: #fff;
+}
+section.comments label{
+    font-size: inherit;
+    font-weight: 600;
+    color: #3c4452;
 }
