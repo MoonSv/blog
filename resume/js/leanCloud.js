@@ -71,5 +71,5 @@
             }
         }
     }
-    controller.init();
+    controller.init(view);
 }.call();
