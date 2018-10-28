@@ -203,15 +203,15 @@ function writeMarkdown(speed, targetId, text, previousText, callback) {
         i++;
     }, writeSpeed)
 }
-writeCode(20, "codePart", previewPart1, '', () => {
+writeCode(40, "codePart", previewPart1, '', () => {
     let intro = document.createElement("pre");
     intro.id = "intro";
     document.getElementById("introWrapper").append(intro);
-    writeCode(20, "codePart", previewPart2, previewPart1, () => {
-        writeMarkdown(20, "intro", markdownText, '', () => {
-            writeCode(20, "codePart", previewPart3, previewPart1 + previewPart2, () => {
+    writeCode(40, "codePart", previewPart2, previewPart1, () => {
+        writeMarkdown(40, "intro", markdownText, '', () => {
+            writeCode(40, "codePart", previewPart3, previewPart1 + previewPart2, () => {
                 document.getElementById("intro").innerHTML = marked(markdownText);
-                writeCode(20, "codePart", previewPart4, previewPart1 + previewPart2 + previewPart3, () => {
+                writeCode(40, "codePart", previewPart4, previewPart1 + previewPart2 + previewPart3, () => {
                 })
             })
         })
