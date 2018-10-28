@@ -5,16 +5,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <style>
-    </style>
     <link rel="stylesheet" href="./prism/prism.css">
-    <style id="stylePart">
-        .token selector,
-        .token punctuation,
-        .token property,
-        .token comment {
+    <style>
+        .token.selector,
+        .token.punctuation,
+        .token.property,
+        .token.comment,
+        .token.function {
             color: slategray;
         }
+    </style>
+    <style id="stylePart">
+
     </style>
     <title>Ainimation-demo</title>
 </head>
@@ -74,14 +76,17 @@ body{
  * You might think that it's not easy to distinguish the format,
  * so ...
  */
-.token punctuation{
+.token.punctuation{
     color: #999;
 }
-.token property{
+.token.property{
     color: #905;
 }
-.token selector{
-    #00a8e2
+.token.selector{
+    color: #690;
+}
+.token.function{
+    color: #DD4A68;
 }
 /*
  * Looks better now? ^^
@@ -128,11 +133,13 @@ body{
                 i++;
             }, writeSpeed)
         }
-        writeCode(0, "codePart", previewPart1, '', () => {
+        writeCode(50, "codePart", previewPart1, '', () => {
             let intro = document.createElement("pre");
             intro.id = "intro";
             document.getElementById("introWrapper").append(intro);
-            writeCode(0, "codePart", previewPart2, previewPart1, writeMarkdown(0, "intro", markdownText, '', ()=>{ }))
+            writeCode(50, "codePart", previewPart2, previewPart1, () => {
+                writeMarkdown(0, "intro", markdownText, '', () => { })
+            })
         });
         let previewPart2 = `
 /*
