@@ -14,6 +14,7 @@
         .token.function {
             color: slategray;
         }
+        ol, ul { padding-left:40px; } 
     </style>
     <style id="stylePart">
 
@@ -25,166 +26,12 @@
     <div id="codePartWrapper">
         <pre id="codePart"></pre>
     </div>
-    <div id="introWrapper"></div>
-
+    <div id="introWrapper">
+    </div>
+    
     <script src="./prism/prism.js"></script>
-    <script>
-        let previewPart1 = `
-/*
- * Hi, This is Joe, in this demo, you will see how CSS works on the webpage.
- * Let's start.
- * First, give a grey color of the backgroud,
- */
-body{
-    background-color: #e0e0e0;
-}
-/*
- * and write some initial style
-*/
-*{
-    margin: 0;
-    padding: 0;
-    transition: all 0.8s;
-    box-sizing: border-box;
-}
-
-#introWrapper {
-    width: 50%;
-    height: 100%;
-    position: fixed;
-    padding: 15px;
-    right: 0;
-}
-/*
- * give a border of this text area and add some style of it.
- */
-#codePartWrapper{
-     width: 50%;
-     height: 100%;
-     padding:15px;
-     position: fixed;
-}
-
-#codePart{
-    width: 100%;
-    height: calc( 100vh - 30px );
-    padding: 15px;
-    box-shadow: 0 0 10px grey;
-    overflow: auto;
-}
-/*
- * You might think that it's not easy to distinguish the format,
- * so ...
- */
-.token.punctuation{
-    color: #999;
-}
-.token.property{
-    color: #905;
-}
-.token.selector{
-    color: #690;
-}
-.token.function{
-    color: #DD4A68;
-}
-/*
- * Looks better now? ^^
- * Let's continue do some 3d transform:
- */
-#codePart{
-    transform: rotate(3deg);
-    transform: rotate(-3deg);
-    transform: rotate(0deg);
-}
-/*
-* Now, let's create another card to write something..
-*/
-`
-        function writeCode(speed, targetId, text, previousText, callback) {
-            let i = 0;
-            let codePart = document.getElementById(targetId);
-            let stylePart = document.getElementById("stylePart");
-            let writeSpeed = speed;
-            let timer = setInterval(() => {
-                if (i === text.length) {
-                    clearInterval(timer);
-                    callback.call();
-                } else {
-                    codePart.innerHTML = Prism.highlight(previousText + text.substring(0, i + 1), Prism.languages.css, 'css');
-                    stylePart.innerHTML = previousText + text.substring(0, i + 1);
-                    codePart.scrollTop = codePart.scrollHeight;
-                }
-                i++;
-            }, writeSpeed)
-        }
-        function writeMarkdown(speed, targetId, text, previousText, callback) {
-            let i = 0;
-            let codePart = document.getElementById(targetId);
-            let writeSpeed = speed;
-            let timer = setInterval(() => {
-                if (i === text.length) {
-                    clearInterval(timer);
-                    callback.call();
-                } else {
-                    codePart.innerHTML = previousText + text.substring(0, i + 1);
-                    codePart.scrollTop = codePart.scrollHeight;
-                }
-                i++;
-            }, writeSpeed)
-        }
-        writeCode(50, "codePart", previewPart1, '', () => {
-            let intro = document.createElement("pre");
-            intro.id = "intro";
-            document.getElementById("introWrapper").append(intro);
-            writeCode(50, "codePart", previewPart2, previewPart1, () => {
-                writeMarkdown(50, "intro", markdownText, '', () => { })
-            })
-        });
-        let previewPart2 = `
-/*
-* Here we go!
-*/
-#intro{
-    width: 100%;
-    height: 450px;
-    background-color: #fff;
-    border-radius: 5px;
-    padding: 15px;
-}
-/*
- * Let's write someting on the white board!
- */
-`
-        let markdownText = `
-#Self Introduction
-Name: Jiaqi Wang(Joe)
-DOB: 26.12.1993
-Computer science Master degree and will graduate from UNSW on Jan, 2019
-
-# Skills
- - JavaScript
- - ReactJs
- - Vue
-
-# Project
- - Mock Airbnb
- - Pretty resume
- - Canvas drawing board
-
-# Contact me
-Wechat: succinct2426
-E-mail: justwe77@163.com
-Phone: +61 423304568
-
-# Favourite things to do
-1. Photography
-2. Scuba diving
-3. Swimming
-4. ACG
-`
-
-    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.5.1/marked.min.js"></script>
+    <script src="idnex.js"></script>
 </body>
 
 </html>
