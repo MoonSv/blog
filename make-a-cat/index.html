@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="./prism/prism.css">
+    <style>
+        * {
+            transition: all 0.3s;
+        }
+
+        #codePart {
+            width: 100%;
+            height: 50vh;
+            position: absolute;
+            bottom: 0;
+        }
+
+        .button-group {
+            position: absolute;
+            left: 7px;
+            top: 10px;
+            display: flex;
+            flex-direction: column;
+            z-index: 1;
+        }
+
+        .button-group button {
+            width: 50px;
+            height: 50px;
+            border: 1px solid grey;
+            margin-top: 10px;
+            border-radius: 5px;
+            outline: none;
+        }
+
+        .button-group button.active {
+            background-color: #596e8e;
+            border-color: transparent;
+            box-shadow: 0 2px 10px #545454;
+            color: #fff;
+        }
+    </style>
+    <style id="stylePart">
+
+    </style>
+</head>
+
+<body>
+    <div class="button-group">
+        <button data-speed="75">slow</button>
+        <button data-speed="40" class="active">normal</button>
+        <button data-speed="0">fast</button>
+    </div>
+    <div class="drawing-part">
+        <div class="wrapper">
+            <div class="cat">
+                <div class="eye left"></div>
+                <div class="eye right"></div>
+                <div class="mouth"></div>
+            </div>
+            <div class="rainbow">
+                <div class="r1">
+                    <div class="r2">
+                        <div class="r3">
+                            <div class="r4"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="cloud">
+                <div class="c1"></div>
+                <div class="c2"></div>
+                <div class="c3"></div>
+                <div class="c4"></div>
+                <div class="fill-cloud"></div>
+            </div>
+        </div>
+    </div>
+    <pre id="codePart"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="./prism/prism.js"></script>
+    <script>
+
+        
+    </script>
+    <script src="index.js"></script>
+</body>
+
+</html>
