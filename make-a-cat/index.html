@@ -29,12 +29,16 @@
         }
 
         .button-group button {
-            width: 50px;
-            height: 50px;
+            /* width: 50px;
+            height: 50px; */
             border: 1px solid grey;
             margin-top: 10px;
             border-radius: 5px;
             outline: none;
+            font-size: 14px;
+            font-weight: 600;
+            padding: 15px 8px;
+            color: #bd6363;
         }
 
         .button-group button.active {
@@ -52,9 +56,10 @@
 <body>
     <div class="button-group">
         <button data-speed="75">slow</button>
-        <button data-speed="40" class="active">normal</button>
+        <button data-speed="40" class="active">mid</button>
         <button data-speed="0">fast</button>
     </div>
+
     <div class="drawing-part">
         <div class="wrapper">
             <div class="cat">
@@ -85,7 +90,7 @@
     <script src="./prism/prism.js"></script>
     <script>
 
-        
+
     </script>
     <script src="index.js"></script>
 </body>

@@ -213,7 +213,7 @@ body {
 
 !function writeCode(targetId, text, previousText, callback) {
     let speed = 40;
-    $("button").on('click',function(){
+    $(".button-group button").on('click',function(){
         $(this).addClass('active').siblings().removeClass('active')
         speed = parseInt($(this).attr('data-speed'));
     })
